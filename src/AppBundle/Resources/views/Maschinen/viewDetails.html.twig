@@ -4,7 +4,7 @@
 {% block topbutton -%}
         <a href="{{ path('maschinen_details',{ 'maschine_id' :maschine.id, 'behobenstatus': 0 }) }}" class="btn btn-default {% if behoben == 0 %}active{% endif %}">offene Störungen</a>
         <a href="{{ path('maschinen_details',{ 'maschine_id' :maschine.id, 'behobenstatus': 1 }) }}" class="btn btn-default {% if behoben == 1 %}active{% endif %}">abgeschlossene Störungen</a>
-        <a href="{{ path('maschinen_new',{ 'abteilung_id' :maschine.abteilung.id }) }}" class="btn btn-default">Grafik</a>
+        <a href="{{ path('maschinen_grafik',{ 'maschine_id' :maschine.id }) }}" class="btn btn-default">Grafik</a>
 {% endblock %}
 {% block content -%}
     {% if behoben == 0 %}
@@ -83,7 +83,7 @@
         {% endfor %}
         {% endif %}
     </table>
-    <div class="navigation-x-large">
+    <div class="navigation">
     {{ knp_pagination_render(stoerungen) }}
     </div>
     <a class="btn btn-default"
