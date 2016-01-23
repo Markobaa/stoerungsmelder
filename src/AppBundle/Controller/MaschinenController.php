@@ -34,7 +34,7 @@ class MaschinenController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $abteilungen = $em->getRepository('AppBundle:Abteilung')
-                          ->findAll();
+                          ->findBy(array(), array('name' => 'asc'));
 
         if( $abteilung !== null ) {
 	        $maschinen = $em->getRepository('AppBundle:Maschine')

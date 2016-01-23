@@ -35,24 +35,41 @@ class StoerungController extends Controller
 
         );
     }
+
     /**
-     * @Route("/behoben", name="behobene_stoerungen")
+     * @Route("/behoben/{abteilung}", defaults={"abteilung" = null}, name="behobene_stoerungen")
      * @Template()
      */
-    public function behobenAction()
+    public function behobenAction($abteilung)
     {
-        $request = $this -> getrequest();
         $em = $this->getDoctrine()->getManager();
 
+        $abteilungen = $em->getRepository('AppBundle:Abteilung')
+                          ->findBy(array(), array('name' => 'asc'));
+
+         if( $abteilung !== null ) {
+            $maschinen = $em->getRepository('AppBundle:Maschine')
+                            ->findBy(
+                                array('abteilung' => $abteilung)
+                            );
+        } else {
+            $maschinen = array();
+        }                 
+         {
+        $request = $this -> getrequest();
+        $em = $this->getDoctrine()->getManager();
         $behoben = $em->getRepository('AppBundle:Stoerung')
                        ->findBy(array('behoben'=>true),
                                 array('stStart'=>'DESC'));
         $paginator = $this -> get('knp_paginator');
-
         return array(
-            'stoerungen_behoben'=>$paginator->paginate( $behoben, $request -> query->get('page',1), 15)
-        );
+            'stoerungen_behoben'=>$paginator->paginate( $behoben, $request -> query->get('page',1), 15),
+            'abteilungen' => $abteilungen,
+            'aktive_abteilung' => $abteilung,
+            'maschinen' => $maschinen   
+       );
     }
+}
     /**
      * @Route("/beenden/{id}", name="stoerung_beenden")
      * @Template()

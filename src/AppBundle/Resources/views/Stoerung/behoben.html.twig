@@ -1,30 +1,51 @@
 {% extends "::layout.html.twig" %}
 
 {% block title %}
-	behobene Störungen
-{% endblock %}
-
-{% block content %}
+    behobene Störungen
     {% if is_granted('stoerung_melden') %}
         <a class="btn btn-danger" href="{{ path('stoerung_neu') }}">
             neue Störung
         </a>
     {% endif %}
+{% endblock %}
+
+{% block content %}
+
+ <ul class="nav nav-tabs">
+        {% for abteilung in abteilungen %}
+            <li role="presentation"
+                {% if aktive_abteilung == abteilung.id %}
+                    class="active"
+                {% endif %}}
+            >
+                <a href="{{ path('behobene_stoerungen', { 'abteilung': abteilung.id }) }}">
+                    {{abteilung.name}}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% if not aktive_abteilung %}
+        <div class="jumbotron">
+            <h1>Bitte Abteilung auswählen</h1>
+        </div>
+    {% else %}
     {% if stoerungen_behoben %}
     <table class="table-striped table">
         <thead>
             <tr>
                 <th>von-bis</th>
-                <th>Abteilung/Maschine</th>
+                <th>Maschine</th>
                 <th>Massnahmen</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
+            {% for maschine in maschinen %}
         {% for stoerung in stoerungen_behoben %}
+            
             <tr>
                 <td>{{ stoerung.stStart|date("d.m. H:i")}} - {{ stoerung.stEnd|date("d.m. H:i")}}</td>
-                <td>{{ stoerung.maschine.abteilung }}/{{ stoerung.maschine }}</td>
+                <td>{{ stoerung.maschine.abteilung }} / {{ stoerung.maschine }}</td>
                 <td>{{ stoerung.massnahmen }}</td>
                 <td>
                     <a class="btn btn-default" href="{{path('stoerung_show', { 'id': stoerung.id } ) }}">
@@ -33,10 +54,12 @@
                 </td>
             </tr>
         {% endfor %}
+        {% endfor %}
         </tbody>
     </table>
-    <div class="navigation-x-large">
+    <div class="nav nav-tabs">
     {{ knp_pagination_render(stoerungen_behoben) }}
     </div>
-    {% endif %}
+{% endif %}
+{% endif %}
 {% endblock %}
