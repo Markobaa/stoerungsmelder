@@ -4778,7 +4778,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination-lg > li > a,
 .pagination-lg > li > span {
   padding: 10px 16px;
-  font-size: 18px;
+  font-size: 25px;
   line-height: 1.3333333;
 }
 .pagination-lg > li:first-child > a,

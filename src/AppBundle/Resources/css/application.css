@@ -40,7 +40,14 @@ a.unlink:hover {
 	border-radius: 6px;
 	text-align: center;
 	padding: 50px;
-	margin-top: 50px;
-
+	margin-top: 50px;}
+.kappa {
+	border-style: solid;
+	width: auto;
+	border-radius: 6px;
+	height: auto;
+	font-size: 25px;
+	font-family: sans-serif, arial;
+	
 
 }

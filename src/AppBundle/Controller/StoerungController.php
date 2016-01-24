@@ -43,32 +43,25 @@ class StoerungController extends Controller
     public function behobenAction($abteilung)
     {
         $em = $this->getDoctrine()->getManager();
+         $request = $this -> getrequest();
+         $paginator = $this -> get('knp_paginator');
 
         $abteilungen = $em->getRepository('AppBundle:Abteilung')
                           ->findBy(array(), array('name' => 'asc'));
 
-         if( $abteilung !== null ) {
-            $maschinen = $em->getRepository('AppBundle:Maschine')
-                            ->findBy(
-                                array('abteilung' => $abteilung)
-                            );
+        if( $abteilung !== null) {
+            $behoben = $em->getRepository('AppBundle:Stoerung')
+                          ->findBy(array('behoben' => true,
+                                         ),
+                                   array('stStart'=>'DESC'));
         } else {
-            $maschinen = array();
-        }                 
-         {
-        $request = $this -> getrequest();
-        $em = $this->getDoctrine()->getManager();
-        $behoben = $em->getRepository('AppBundle:Stoerung')
-                       ->findBy(array('behoben'=>true),
-                                array('stStart'=>'DESC'));
-        $paginator = $this -> get('knp_paginator');
+            $behoben = array();
+        }
         return array(
             'stoerungen_behoben'=>$paginator->paginate( $behoben, $request -> query->get('page',1), 15),
             'abteilungen' => $abteilungen,
-            'aktive_abteilung' => $abteilung,
-            'maschinen' => $maschinen   
-       );
-    }
+            'aktive_abteilung' => $abteilung
+        );
 }
     /**
      * @Route("/beenden/{id}", name="stoerung_beenden")

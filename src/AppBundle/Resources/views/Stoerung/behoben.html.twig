@@ -40,7 +40,6 @@
             </tr>
         </thead>
         <tbody>
-            {% for maschine in maschinen %}
         {% for stoerung in stoerungen_behoben %}
             
             <tr>
@@ -54,10 +53,9 @@
                 </td>
             </tr>
         {% endfor %}
-        {% endfor %}
         </tbody>
     </table>
-    <div class="nav nav-tabs">
+    <div class="pagination-lg">
     {{ knp_pagination_render(stoerungen_behoben) }}
     </div>
 {% endif %}
