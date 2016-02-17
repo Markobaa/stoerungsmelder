@@ -44,7 +44,7 @@
             
             <tr>
                 <td>{{ stoerung.stStart|date("d.m. H:i")}} - {{ stoerung.stEnd|date("d.m. H:i")}}</td>
-                <td>{{ stoerung.maschine.abteilung }} / {{ stoerung.maschine }}</td>
+                <td>{{ stoerung.maschine }}</td>
                 <td>{{ stoerung.massnahmen }}</td>
                 <td>
                     <a class="btn btn-default" href="{{path('stoerung_show', { 'id': stoerung.id } ) }}">
@@ -55,7 +55,7 @@
         {% endfor %}
         </tbody>
     </table>
-    <div class="pagination-lg">
+    <div>
     {{ knp_pagination_render(stoerungen_behoben) }}
     </div>
 {% endif %}
