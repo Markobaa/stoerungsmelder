@@ -4717,7 +4717,6 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   margin: 20px 0;
   border-radius: 4px;
   color: dimgrey;
-  border: solid 0.2px;
 }
 .pagination > li {
   display: inline;
@@ -4732,7 +4731,6 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   color: #337ab7;
   text-decoration: all;
   background-color: #fff;
-  border: 1px solid #fff;
 }
 .pagination > li:first-child > a,
 .pagination > li:first-child > span {
