@@ -43,6 +43,13 @@ class Stoerung
     private $stEnd;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="st_laenge", type="datetime")
+     */
+    private $stLaenge;
+
+    /**
      * @var \Boolean
      *
      * @ORM\Column(name="behoben", type="boolean")
@@ -282,4 +289,34 @@ class Stoerung
     {
         return $this->fehlercode;
     }
+
+     /**
+     * Set stLaenge
+     *
+     * @param \DateTime $stLaenge
+     *
+     * @return Stoerung
+     */
+    public function setstLaenge($stLaenge)
+    {
+
+        $sql  = "date_diff(hour,stStart, stEnd)";
+
+
+        $this->stLaenge = $stLaenge;
+
+        return $this;
+    }
+
+    /**
+     * Get stLaenge
+     *
+     * @return \DateTime
+     */
+    public function  getstLaenge()
+     {
+        return $this->stLaenge;
+    }
+
+
 }

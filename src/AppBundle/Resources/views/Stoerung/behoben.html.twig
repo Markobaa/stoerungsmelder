@@ -34,6 +34,7 @@
         <thead>
             <tr>
                 <th>von-bis</th>
+                <th>Störungszeit</th>
                 <th>Maschine</th>
                 <th>Massnahmen</th>
                 <th></th>
@@ -44,6 +45,7 @@
             
             <tr>
                 <td>{{ stoerung.stStart|date("d.m. H:i")}} - {{ stoerung.stEnd|date("d.m. H:i")}}</td>
+                <td>Stoerungszeit</td>
                 <td>{{ stoerung.maschine }}</td>
                 <td>{{ stoerung.massnahmen }}</td>
                 <td>

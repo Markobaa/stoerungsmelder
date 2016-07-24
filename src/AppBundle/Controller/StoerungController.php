@@ -65,7 +65,7 @@ class StoerungController extends Controller
         } else {
             $behoben = array();
         }
-        return array(
+                 return array(
             'stoerungen_behoben'=>$paginator->paginate( $behoben, $request -> query->get('page',1), 15),
             'abteilungen' => $abteilungen,
             'aktive_abteilung' => $abteilung,
